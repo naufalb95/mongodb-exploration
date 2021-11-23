@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const UserController = require('../controllers/userController');
-const errorHandler = require('../middlewares/errorHandler');
+const { errorHandler } = require('../middlewares');
 
 router.get('/users', UserController.getAllUser);
 
