@@ -9,7 +9,7 @@ class User {
 
       return users;
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
 }
