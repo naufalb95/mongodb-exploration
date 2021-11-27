@@ -7,7 +7,6 @@ class CartController {
 
       res.status(200).json(carts);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   };
@@ -18,7 +17,6 @@ class CartController {
 
       res.status(200).json(carts);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   };

@@ -39,7 +39,6 @@ class User {
 
       return carts;
     } catch (err) {
-      console.log(err);
       return err;
     }
   };
