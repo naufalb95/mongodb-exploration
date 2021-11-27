@@ -9,6 +9,30 @@ class Item {
       });
     }
 
+    if (options.minStock) {
+      filter.push({
+        $match: { stock: { $gte: +options.minStock } }
+      });
+    }
+
+    if (options.maxStock) {
+      filter.push({
+        $match: { stock: { $lte: +options.maxStock } }
+      });
+    }
+
+    if (options.minPrice) {
+      filter.push({
+        $match: { price: { $gte: +options.minPrice } }
+      });
+    }
+
+    if (options.maxPrice) {
+      filter.push({
+        $match: { price: { $lte: +options.maxPrice } }
+      });
+    }
+
     try {
       const db = getDatabase();
       const itemCollection = db.collection('items');
@@ -23,6 +47,116 @@ class Item {
             }
           },
           ...filter
+        ])
+        .toArray();
+
+      return items;
+    } catch (err) {
+      return err;
+    }
+  };
+
+  static countItems = async () => {
+    try {
+      const db = getDatabase();
+      const itemCollection = db.collection('items');
+      const items = await itemCollection
+        .aggregate([
+          {
+            $count: 'totalItems'
+          }
+        ])
+        .toArray();
+
+      return items[0];
+    } catch (err) {
+      return err;
+    }
+  };
+
+  static countItemStocks = async () => {
+    try {
+      const db = getDatabase();
+      const itemCollection = db.collection('items');
+      const items = await itemCollection
+        .aggregate([
+          {
+            $group: {
+              _id: '$stock',
+              itemStocks: { $sum: '$stock' }
+            }
+          }
+        ])
+        .toArray();
+
+      return items[0];
+    } catch (err) {
+      return err;
+    }
+  };
+
+  static findItemHighestPrice = async () => {
+    try {
+      const db = getDatabase();
+      const itemCollection = db.collection('items');
+      const items = await itemCollection
+        .aggregate([
+          {
+            $group: {
+              _id: '$name',
+              highestPriceItem: { $max: '$price' }
+            }
+          }
+        ])
+        .toArray();
+
+      return items[0];
+    } catch (err) {
+      return err;
+    }
+  };
+
+  static findItemLowestPrice = async () => {
+    try {
+      const db = getDatabase();
+      const itemCollection = db.collection('items');
+      const items = await itemCollection
+        .aggregate([
+          {
+            $group: {
+              _id: '$name',
+              lowestPriceItem: { $min: '$price' }
+            }
+          }
+        ])
+        .toArray();
+
+      return items[0];
+    } catch (err) {
+      return err;
+    }
+  };
+
+  static avgItemPriceCategory = async () => {
+    try {
+      const db = getDatabase();
+      const itemCollection = db.collection('items');
+      const items = await itemCollection
+        .aggregate([
+          {
+            $lookup: {
+              from: 'categories',
+              localField: 'categoryId',
+              foreignField: '_id',
+              as: 'category'
+            }
+          },
+          {
+            $group: {
+              _id: '$category.name',
+              averagePrice: { $avg: '$price' }
+            }
+          }
         ])
         .toArray();
 

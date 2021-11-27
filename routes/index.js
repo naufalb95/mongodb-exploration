@@ -10,7 +10,20 @@ router.get('/users', UserController.getAllUser);
 
 router.get('/items', ItemController.getAllItems);
 
+router.get('/items/counts', ItemController.getItemCounts);
+
+router.get('/items/stocks', ItemController.getItemStocks);
+
+router.get('/items/high_price', ItemController.getItemHighestPrice);
+
+router.get('/items/low_price', ItemController.getItemLowestPrice);
+
 router.get('/categories', ItemController.getCategories);
+
+router.get(
+  '/categories/prices/average',
+  ItemController.getAverageItemStockByCategory
+);
 
 router.use(errorHandler);
 
