@@ -3,6 +3,7 @@ const router = express.Router();
 
 const UserController = require('../controllers/userController');
 const ItemController = require('../controllers/itemController');
+const CartController = require('../controllers/cartController');
 
 const { errorHandler } = require('../middlewares');
 
@@ -24,6 +25,10 @@ router.get(
   '/categories/prices/average',
   ItemController.getAverageItemStockByCategory
 );
+
+router.get('/carts', CartController.getAllCarts);
+
+router.get('/carts/count', CartController.countCarts);
 
 router.use(errorHandler);
 
