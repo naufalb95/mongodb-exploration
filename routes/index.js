@@ -10,8 +10,6 @@ router.get('/users', UserController.getAllUser);
 
 router.get('/items', ItemController.getAllItems);
 
-router.get('/items/categories/:categoryName', ItemController.getItemByCategory);
-
 router.get('/categories', ItemController.getCategories);
 
 router.use(errorHandler);
