@@ -8,63 +8,63 @@ const itemSeeder = async (categories) => {
       price: 2500,
       stock: 250,
       description: 'Sebuah sayur yang namanya kangkung',
-      categoryId: ObjectId(categories[1]._id)
+      categoryId: categories[1]
     },
     {
       name: 'Apel',
       price: 25000,
       stock: 150,
       description: 'Sebuah buah yang namanya apel',
-      categoryId: ObjectId(categories[0]._id)
+      categoryId: categories[0]
     },
     {
       name: 'Cheetos',
       price: 4500,
       stock: 100,
       description: 'Sebuah snacks yang namanya cheetos',
-      categoryId: ObjectId(categories[2]._id)
+      categoryId: categories[2]
     },
     {
       name: 'Baskin n Robin',
       price: 50000,
       stock: 50,
       description: 'Sebuah ice cream yang namanya baskin n robin',
-      categoryId: ObjectId(categories[3]._id)
+      categoryId: categories[3]
     },
     {
       name: 'Bawang Merah',
       price: 3500,
       stock: 230,
       description: 'Sebuah sayur yang namanya bawang merah',
-      categoryId: ObjectId(categories[1]._id)
+      categoryId: categories[1]
     },
     {
       name: 'Bawang Putih',
       price: 5500,
       stock: 170,
       description: 'Sebuah sayur yang namanya bawang putih',
-      categoryId: ObjectId(categories[1]._id)
+      categoryId: categories[1]
     },
     {
       name: 'Pepaya',
       price: 20500,
       stock: 20,
       description: 'Sebuah buah yang namanya pepaya',
-      categoryId: ObjectId(categories[0]._id)
+      categoryId: categories[0]
     },
     {
       name: 'Momogi',
       price: 2500,
       stock: 250,
       description: 'Sebuah snacks yang namanya momogi',
-      categoryId: ObjectId(categories[2]._id)
+      categoryId: categories[2]
     },
     {
       name: 'Cabai',
       price: 55000,
       stock: 130,
       description: 'Sebuah sayur yang namanya cabai',
-      categoryId: ObjectId(categories[1]._id)
+      categoryId: categories[1]
     }
   ];
   try {
