@@ -46,7 +46,10 @@ class Item {
               as: 'category'
             }
           },
-          ...filter
+          ...filter,
+          {
+            $sort: { name: 1 }
+          }
         ])
         .toArray();
 
@@ -82,7 +85,7 @@ class Item {
         .aggregate([
           {
             $group: {
-              _id: '$stock',
+              _id: null,
               itemStocks: { $sum: '$stock' }
             }
           }
@@ -103,7 +106,7 @@ class Item {
         .aggregate([
           {
             $group: {
-              _id: '$name',
+              _id: null,
               highestPriceItem: { $max: '$price' }
             }
           }
@@ -124,7 +127,7 @@ class Item {
         .aggregate([
           {
             $group: {
-              _id: '$name',
+              _id: null,
               lowestPriceItem: { $min: '$price' }
             }
           }
@@ -153,7 +156,7 @@ class Item {
           },
           {
             $group: {
-              _id: '$category.name',
+              _id: null,
               averagePrice: { $avg: '$price' }
             }
           }
@@ -185,6 +188,9 @@ class Item {
               _id: '$category.name',
               stockQuantity: { $sum: '$stock' }
             }
+          },
+          {
+            $sort: { stockQuantity: -1 }
           }
         ])
         .toArray();
