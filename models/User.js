@@ -5,11 +5,17 @@ class User {
     try {
       const db = getDatabase();
       const userCollection = db.collection('users');
-      const users = await userCollection.find().toArray();
+      const users = await userCollection
+        .aggregate([
+          {
+            $unset: 'password'
+          }
+        ])
+        .toArray();
 
       return users;
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
 }
